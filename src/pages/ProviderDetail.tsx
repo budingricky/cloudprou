@@ -12,6 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../components/ui/DropdownMenu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../components/ui/Dialog";
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { Skeleton } from '../components/ui/Skeleton';
 import { PageTransition } from '../components/layout/PageTransition';
@@ -23,6 +31,7 @@ const ProviderDetail = () => {
   const { accounts, removeAccount } = useStore();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   
   const account = accounts.find(a => a.id === id);
 
@@ -53,10 +62,9 @@ const ProviderDetail = () => {
   };
 
   const handleRemove = () => {
-    if (confirm('确定要移除此账户吗？本地数据将被删除。')) {
-      removeAccount(account.id);
-      navigate('/dashboard');
-    }
+    setIsDeleteDialogOpen(false);
+    removeAccount(account.id);
+    navigate('/dashboard');
   };
 
   const getStatusIcon = (status: string) => {
@@ -104,13 +112,32 @@ const ProviderDetail = () => {
                 </motion.div>
                 刷新数据
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleRemove} className="text-red-600 cursor-pointer rounded-lg focus:text-red-600 focus:bg-red-50">
+              <DropdownMenuItem onClick={() => setIsDeleteDialogOpen(true)} className="text-red-600 cursor-pointer rounded-lg focus:text-red-600 focus:bg-red-50">
                 <Trash2 className="w-4 h-4 mr-2" />
                 移除账户
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
+
+        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>确认移除账户？</DialogTitle>
+              <DialogDescription>
+                此操作将从本地移除该账户及其所有缓存数据。此操作无法撤销。
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="rounded-full h-10">
+                取消
+              </Button>
+              <Button variant="destructive" onClick={handleRemove} className="rounded-full h-10">
+                确认移除
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <div className="flex-1 overflow-y-auto p-5 space-y-5 no-scrollbar">
           {/* Balance Card */}
