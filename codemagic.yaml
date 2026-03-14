@@ -8,7 +8,7 @@ workflows:
         - app_store_credentials # 在 Codemagic UI 中配置: APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_IDENTIFIER, APP_STORE_CONNECT_PRIVATE_KEY (API Key 内容)
         - ios_signing # 在 Codemagic UI 中配置: CERTIFICATE_PRIVATE_KEY (P12文件), CERTIFICATE_PASSWORD (P12密码), PROVISIONING_PROFILE (Profile文件)
       vars:
-        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_PROJECT: "ios/App/App.xcodeproj"
         XCODE_SCHEME: "App"
         BUNDLE_ID: "com.bd1bmc.cloudset" # [重要] 请修改为您在 Apple Developer 创建的真实 Bundle ID
         APP_STORE_ID: "6760583204" # [重要] 请修改为您在 App Store Connect 创建 App 后生成的 Apple ID (纯数字)
@@ -28,29 +28,16 @@ workflows:
         script: |
           npm install --legacy-peer-deps
           npm run build
-          # Force create ios directory structure if missing
-          if [ ! -f "ios/App/Podfile" ]; then
-            echo "Podfile not found, recreating ios platform..."
-            rm -rf ios
-            npx cap add ios
-          fi
-          # Force update to regenerate Podfile and ensure native plugins are synced
-          npx cap update ios
           npx cap sync ios
           
-      - name: Debug and Install CocoaPods
+      - name: Debug iOS project structure
         script: |
           echo "Current directory: $(pwd)"
           ls -R ios
-          cd ios/App
-          # If Podfile is missing, regenerate it using capacitor
-          if [ ! -f "Podfile" ]; then
-            echo "Podfile missing in ios/App, regenerating..."
-            cd ../..
-            npx cap update ios
-            cd ios/App
+          if [ ! -d "ios/App/App.xcodeproj" ]; then
+            echo "ios/App/App.xcodeproj not found"
+            exit 1
           fi
-          pod install --repo-update
           
       - name: Initialize Keychain
         script: |
@@ -74,7 +61,7 @@ workflows:
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \
-            --workspace "$XCODE_WORKSPACE" \
+            --project "$XCODE_PROJECT" \
             --scheme "$XCODE_SCHEME"
             
     artifacts:
