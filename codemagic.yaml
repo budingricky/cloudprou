@@ -43,6 +43,13 @@ workflows:
           echo "Current directory: $(pwd)"
           ls -R ios
           cd ios/App
+          # If Podfile is missing, regenerate it using capacitor
+          if [ ! -f "Podfile" ]; then
+            echo "Podfile missing in ios/App, regenerating..."
+            cd ../..
+            npx cap update ios
+            cd ios/App
+          fi
           pod install --repo-update
           
       - name: Initialize Keychain
