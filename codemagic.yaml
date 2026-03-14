@@ -33,7 +33,18 @@ workflows:
       - name: Initialize Keychain
         script: |
           keychain initialize
-      
+          
+      - name: Decode and import certificates
+        script: |
+          echo $CERTIFICATE_PRIVATE_KEY | base64 --decode > /tmp/certificate.p12
+          keychain add-certificates --certificate /tmp/certificate.p12 --certificate-password $CERTIFICATE_PASSWORD
+          
+      - name: Decode and setup Provisioning Profile
+        script: |
+          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_HOME"
+          echo $PROVISIONING_PROFILE | base64 --decode > "$PROFILES_HOME/profile.mobileprovision"
+          
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles

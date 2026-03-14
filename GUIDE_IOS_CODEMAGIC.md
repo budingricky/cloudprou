@@ -133,11 +133,23 @@ vars:
 | `APP_STORE_CONNECT_PRIVATE_KEY` | (粘贴 .p8 文件内容) | API Key 私钥内容 |
 
 #### 组名：`ios_signing`
+*(注意：以下文件内容需要转换为 Base64 字符串)*
+
+**如何转换 Base64 (Windows):**
+打开 PowerShell，执行以下命令：
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("cert\ios_distribution.p12")) | clip
+# 此时剪贴板中已复制 p12 的 base64 字符串
+
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("cert\your_profile.mobileprovision")) | clip
+# 此时剪贴板中已复制 mobileprovision 的 base64 字符串
+```
+
 | 变量名 | 值 | 说明 |
 | :--- | :--- | :--- |
-| `CERTIFICATE_PRIVATE_KEY` | (上传 .p12 文件) | 导出的发布证书 |
+| `CERTIFICATE_PRIVATE_KEY` | (粘贴 p12 的 Base64 字符串) | 导出的发布证书 |
 | `CERTIFICATE_PASSWORD` | (您的密码) | 导出 .p12 时设置的密码 |
-| `PROVISIONING_PROFILE` | (上传 .mobileprovision 文件) | 下载的描述文件 |
+| `PROVISIONING_PROFILE` | (粘贴 profile 的 Base64 字符串) | 下载的描述文件 |
 
 ---
 
