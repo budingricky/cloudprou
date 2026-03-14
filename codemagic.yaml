@@ -17,8 +17,12 @@ workflows:
         - push
         - tag
       branch_patterns:
-        - "main"
-        - "release/*"
+        - pattern: 'main'
+          include: true
+          source: true
+        - pattern: 'release/*'
+          include: true
+          source: true
     scripts:
       - name: Install dependencies
         script: |
