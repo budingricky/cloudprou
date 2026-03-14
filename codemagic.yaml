@@ -29,7 +29,12 @@ workflows:
           npm install --legacy-peer-deps
           npm run build
           npx cap sync ios
-      
+          
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios/App
+          pod install
+          
       - name: Initialize Keychain
         script: |
           keychain initialize
