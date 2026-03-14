@@ -1,0 +1,166 @@
+Incident Identifier: E882234B-7FD0-44FA-94F0-46CFA35A135A
+Distributor ID:      com.apple.TestFlight
+Hardware Model:      iPhone17,1
+Process:             App [13725]
+Path:                /private/var/containers/Bundle/Application/A60BE370-F106-47C4-A6AE-8BB7E67BDDC8/App.app/App
+Identifier:          com.bd1bmc.cloudset
+Version:             1.0 (1)
+AppStoreTools:       17C7003g
+AppVariant:          1:iPhone17,1:26
+Beta:                YES
+Code Type:           ARM-64 (Native)
+Role:                Foreground
+Parent Process:      launchd [1]
+Coalition:           com.bd1bmc.cloudset [3299]
+
+Date/Time:           2026-03-14 21:29:08.0432 +0800
+Launch Time:         2026-03-14 21:29:06.4517 +0800
+OS Version:          iPhone OS 26.3.1 (23D8133)
+Release Type:        User
+Baseband Version:    2.40.01
+Report Version:      104
+
+Exception Type:  EXC_CRASH (SIGABRT)
+Exception Codes: 0x0000000000000000, 0x0000000000000000
+Termination Reason: TCC 0 
+This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSFaceIDUsageDescription key with a string value explaining to the user how the app uses this data.
+
+Triggered by Thread:  6
+
+
+Thread 0 name:
+Thread 0:
+0   libsystem_kernel.dylib        	0x0000000232f3acd4 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	0x0000000232f3e2f8 mach_msg2_internal + 76 (mach_msg.c:201)
+2   libsystem_kernel.dylib        	0x0000000232f3e214 mach_msg_overwrite + 428 (mach_msg.c:0)
+3   libsystem_kernel.dylib        	0x0000000232f3e05c mach_msg + 24 (mach_msg.c:323)
+4   CoreFoundation                	0x00000001853e9868 __CFRunLoopServiceMachPort + 160 (CFRunLoop.c:2650)
+5   CoreFoundation                	0x00000001853c0848 __CFRunLoopRun + 1188 (CFRunLoop.c:3035)
+6   CoreFoundation                	0x00000001853bfa6c _CFRunLoopRunSpecificWithOptions + 532 (CFRunLoop.c:3462)
+7   GraphicsServices              	0x0000000229d5d498 GSEventRunModal + 120 (GSEvent.c:2049)
+8   UIKitCore                     	0x000000018ae6fdf8 -[UIApplication _run] + 792 (UIApplication.m:3904)
+9   UIKitCore                     	0x000000018ae18e54 UIApplicationMain + 336 (UIApplication.m:5579)
+10  App                           	0x00000001044d0370 main + 64 (AppDelegate.swift:5)
+11  dyld                          	0x000000018239ae28 start + 7116 (dyldMain.cpp:1477)
+
+Thread 1:
+
+Thread 2:
+
+Thread 3:
+
+Thread 4:
+
+Thread 5:
+
+Thread 6 name:
+Thread 6 Crashed:
+0   libsystem_kernel.dylib        	0x0000000232f4cd24 __abort_with_payload + 8
+1   libsystem_kernel.dylib        	0x0000000232f6d99c abort_with_payload_wrapper_internal + 104 (terminate_with_reason.c:102)
+2   libsystem_kernel.dylib        	0x0000000232f6d9d0 abort_with_payload + 16 (terminate_with_reason.c:124)
+3   TCC                           	0x00000001b40b035c __TCC_CRASHING_DUE_TO_PRIVACY_VIOLATION__ + 172 (TCC.c:595)
+4   TCC                           	0x00000001b40abc20 ___tcc_server_send_request_authorization_block_invoke_3 + 124 (tcc_server.c:326)
+5   TCC                           	0x00000001b40a908c tccd_send_message + 1596 (TCC.c:0)
+6   TCC                           	0x00000001b40ab9b8 tccd_send_v2 + 140 (TCC.c:339)
+7   TCC                           	0x00000001b40abb88 ___tcc_server_send_request_authorization_block_invoke_2 + 264 (tcc_server.c:312)
+8   libdispatch.dylib             	0x00000001be0e67fc _dispatch_client_callout + 16 (client_callout.mm:85)
+9   libdispatch.dylib             	0x00000001be0dc8c0 _dispatch_lane_barrier_sync_invoke_and_complete + 56 (queue.c:1128)
+10  libsystem_trace.dylib         	0x00000001aa2e1b34 _os_activity_initiate_impl + 64 (activity.c:137)
+11  TCC                           	0x00000001b40ab0a0 _tcc_server_send_request_authorization + 728 (tcc_server.c:444)
+12  TCC                           	0x00000001b40aad8c tcc_server_message_request_authorization + 384 (tcc_server.c:1285)
+13  LocalAuthenticationCore       	0x00000001b2c24724 -[LACTCCManager requestAuthorizationForService:completion:] + 232 (LACTCCManager.m:74)
+14  LocalAuthentication           	0x00000001aa0842d0 -[LAClient _checkIdResultForTCC:synchronous:error:retryBlock:finally:] + 460 (LAClient.m:401)
+15  LocalAuthentication           	0x00000001aa0853cc __64-[LAClient evaluatePolicy:options:uiDelegate:synchronous:reply:]_block_invoke_2 + 180 (LAClient.m:582)
+16  CoreFoundation                	0x00000001853e86c4 __invoking___ + 148
+17  CoreFoundation                	0x00000001853e8550 -[NSInvocation invoke] + 424 (NSForwarding.m:3411)
+18  Foundation                    	0x0000000182a05a10 <deduplicated_symbol> + 16
+19  Foundation                    	0x000000018344ab68 -[NSXPCConnection _decodeAndInvokeReplyBlockWithEvent:sequence:replyInfo:] + 528 (NSXPCConnection.m:314)
+20  Foundation                    	0x000000018344e8d4 __88-[NSXPCConnection _sendInvocation:orArguments:count:methodSignature:selector:withProxy:]_block_invoke_5 + 188 (NSXPCConnection.m:1658)
+21  Foundation                    	0x000000018344e3e4 -[NSXPCConnection _sendInvocation:orArguments:count:methodSignature:selector:withProxy:] + 2164 (NSXPCConnection.m:1675)
+22  CoreFoundation                	0x00000001853e81cc ___forwarding___ + 1072 (NSForwarding.m:3650)
+23  CoreFoundation                	0x00000001853f0200 _CF_forwarding_prep_0 + 96
+24  LocalAuthentication           	0x00000001aa0852e0 __64-[LAClient evaluatePolicy:options:uiDelegate:synchronous:reply:]_block_invoke + 204 (LAClient.m:581)
+25  LocalAuthentication           	0x00000001aa08473c __47-[LAClient _performSynchronous:callId:finally:]_block_invoke + 520 (LAClient.m:456)
+26  libdispatch.dylib             	0x00000001be0ccadc _dispatch_call_block_and_release + 32 (init.c:1575)
+27  libdispatch.dylib             	0x00000001be0e67fc _dispatch_client_callout + 16 (client_callout.mm:85)
+28  libdispatch.dylib             	0x00000001be0d1664 _dispatch_continuation_pop + 596 (queue.c:349)
+29  libdispatch.dylib             	0x00000001be0d0cd8 _dispatch_async_redirect_invoke + 580 (queue.c:873)
+30  libdispatch.dylib             	0x00000001be0def48 _dispatch_root_queue_drain + 364 (queue.c:7409)
+31  libdispatch.dylib             	0x00000001be0df6fc _dispatch_worker_thread2 + 180 (queue.c:7487)
+32  libsystem_pthread.dylib       	0x00000001e1f1937c _pthread_wqthread + 232 (pthread.c:2709)
+33  libsystem_pthread.dylib       	0x00000001e1f188c0 start_wqthread + 8
+
+Thread 7 name:
+Thread 7:
+0   libsystem_kernel.dylib        	0x0000000232f3acd4 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	0x0000000232f3e2f8 mach_msg2_internal + 76 (mach_msg.c:201)
+2   libsystem_kernel.dylib        	0x0000000232f3e214 mach_msg_overwrite + 428 (mach_msg.c:0)
+3   libsystem_kernel.dylib        	0x0000000232f3e05c mach_msg + 24 (mach_msg.c:323)
+4   CoreFoundation                	0x00000001853e9868 __CFRunLoopServiceMachPort + 160 (CFRunLoop.c:2650)
+5   CoreFoundation                	0x00000001853c0848 __CFRunLoopRun + 1188 (CFRunLoop.c:3035)
+6   CoreFoundation                	0x00000001853bfa6c _CFRunLoopRunSpecificWithOptions + 532 (CFRunLoop.c:3462)
+7   Foundation                    	0x000000018337ff54 -[NSRunLoop(NSRunLoop) runMode:beforeDate:] + 212 (NSRunLoop.m:375)
+8   Foundation                    	0x000000018338012c -[NSRunLoop(NSRunLoop) runUntilDate:] + 64 (NSRunLoop.m:422)
+9   UIKitCore                     	0x000000018ae45094 -[UIEventFetcher threadMain] + 408 (UIEventFetcher.m:1333)
+10  Foundation                    	0x0000000182a3f21c __NSThread__start__ + 732 (NSThread.m:997)
+11  libsystem_pthread.dylib       	0x00000001e1f1c44c _pthread_start + 136 (pthread.c:931)
+12  libsystem_pthread.dylib       	0x00000001e1f188cc thread_start + 8
+
+Thread 8:
+
+Thread 9:
+
+Thread 10:
+
+Thread 11 name:
+Thread 11:
+0   libsystem_kernel.dylib        	0x0000000232f405d4 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	0x00000001e1f1ab58 _pthread_cond_wait + 984 (pthread_cond.c:862)
+2   JavaScriptCore                	0x000000019a48f274 scavenger_thread_main + 1440 (pas_scavenger.c:397)
+3   libsystem_pthread.dylib       	0x00000001e1f1c44c _pthread_start + 136 (pthread.c:931)
+4   libsystem_pthread.dylib       	0x00000001e1f188cc thread_start + 8
+
+Thread 12 name:
+Thread 12:
+0   libsystem_kernel.dylib        	0x0000000232f3ac50 semaphore_wait_trap + 8
+1   WebKit                        	0x000000019fa30bbc IPC::StreamConnectionWorkQueue::startProcessingThread()::$_0::operator()() + 48 (StreamConnectionWorkQueue.cpp:133)
+2   JavaScriptCore                	0x000000019a62cd34 WTF::Thread::entryPoint(WTF::Thread::NewThreadContext*) + 368 (Threading.cpp:268)
+3   JavaScriptCore                	0x000000019a62ce14 WTF::wtfThreadEntryPoint(void*) + 16 (ThreadingPOSIX.cpp:245)
+4   libsystem_pthread.dylib       	0x00000001e1f1c44c _pthread_start + 136 (pthread.c:931)
+5   libsystem_pthread.dylib       	0x00000001e1f188cc thread_start + 8
+
+
+Thread 6 crashed with ARM Thread State (64-bit):
+    x0: 0x000000000000000b   x1: 0x0000000000000000   x2: 0x00000001097637b0   x3: 0x0000000000000019
+    x4: 0x00000001097637dc   x5: 0x0000000000000000   x6: 0x00f2000004220122   x7: 0x0000000000000000
+    x8: 0x0000000000000020   x9: 0xddb802aa912e0099  x10: 0x0100000100000000  x11: 0x0000000000253a29
+   x12: 0x0000000000000000  x13: 0x0200000110000b50  x14: 0x0000020000001000  x15: 0x0200000010000a30
+   x16: 0x0000000000000209  x17: 0x00000001f03b7dc8  x18: 0x0000000000000000  x19: 0x0000000000000000
+   x20: 0x00000001097637dc  x21: 0x0000000000000019  x22: 0x00000001097637b0  x23: 0x0000000000000000
+   x24: 0x000000000000000b  x25: 0x0000000000000000  x26: 0x000000011a5505f0  x27: 0x00000001eeb7a000
+   x28: 0x000000016bc75700   fp: 0x000000016bc75470   lr: 0x0000000232f6d99c
+    sp: 0x000000016bc75430   pc: 0x0000000232f4cd24 cpsr: 0x40000000
+   esr: 0x56000080 (Syscall)
+
+
+Binary Images:
+        0x1044cc000 -         0x1044e7fff App arm64  <f5a6514ff8893e4f9da56a9e2312e097> /var/containers/Bundle/Application/A60BE370-F106-47C4-A6AE-8BB7E67BDDC8/App.app/App
+        0x104628000 -         0x104633fff Cordova arm64  <aa2e2aaabec0357f8de02f87fa094534> /private/var/containers/Bundle/Application/A60BE370-F106-47C4-A6AE-8BB7E67BDDC8/App.app/Frameworks/Cordova.framework/Cordova
+        0x104660000 -         0x10466bfff libobjc-trampolines.dylib arm64e  <1954b963897d321f88be880ecef5b408> /private/preboot/Cryptexes/OS/usr/lib/libobjc-trampolines.dylib
+        0x1046dc000 -         0x104763fff Capacitor arm64  <980a05f5317733b682c5cf379aa6591f> /private/var/containers/Bundle/Application/A60BE370-F106-47C4-A6AE-8BB7E67BDDC8/App.app/Frameworks/Capacitor.framework/Capacitor
+        0x182396000 -         0x18243534b dyld arm64e  <8acdb5808ab738c0a586e667adb1c11c> /usr/lib/dyld
+        0x1829dd000 -         0x183823c9f Foundation arm64e  <42c593bb89fb3ec48220c746811e7a43> /System/Library/Frameworks/Foundation.framework/Foundation
+        0x1853a3000 -         0x18592973f CoreFoundation arm64e  <2f32d38446373018843e4fc875b865c4> /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+        0x18add2000 -         0x18d2319bf UIKitCore arm64e  <c768f963a0cc3f5ca1d32e06d53a2381> /System/Library/PrivateFrameworks/UIKitCore.framework/UIKitCore
+        0x19a482000 -         0x19beb533f JavaScriptCore arm64e  <7c712e087e693fa980a1d1e8a4aa4210> /System/Library/Frameworks/JavaScriptCore.framework/JavaScriptCore
+        0x19f999000 -         0x1a106d7ff WebKit arm64e  <8338d2bf1c6b3b01b979a50f6d272044> /System/Library/Frameworks/WebKit.framework/WebKit
+        0x1aa071000 -         0x1aa0c019f LocalAuthentication arm64e  <dd7df52a6ba734989138f373c1ad05ef> /System/Library/Frameworks/LocalAuthentication.framework/LocalAuthentication
+        0x1aa2db000 -         0x1aa2fb31f libsystem_trace.dylib arm64e  <d1d02aad393939dfbb569ad956d67e22> /usr/lib/system/libsystem_trace.dylib
+        0x1b2bdd000 -         0x1b2d36c3f LocalAuthenticationCore arm64e  <502e89eea73030f498622682dcbcfe16> /System/Library/PrivateFrameworks/LocalAuthenticationCore.framework/LocalAuthenticationCore
+        0x1b40a7000 -         0x1b40c0c63 TCC arm64e  <3674656af7af36b18b420c4804d21882> /System/Library/PrivateFrameworks/TCC.framework/TCC
+        0x1be0cb000 -         0x1be11121f libdispatch.dylib arm64e  <904d48a3d99e3962bfa9c3dfb66bba83> /usr/lib/system/libdispatch.dylib
+        0x1e1f18000 -         0x1e1f2445f libsystem_pthread.dylib arm64e  <4f94107b94d23e888542f5403c581b50> /usr/lib/system/libsystem_pthread.dylib
+        0x229d5c000 -         0x229d647ff GraphicsServices arm64e  <12a401ff966436029f17f3047446e62b> /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+        0x232f3a000 -         0x232f74d2b libsystem_kernel.dylib arm64e  <8d8301292cbe32a9b61ece493eecb399> /usr/lib/system/libsystem_kernel.dylib
+
+EOF
