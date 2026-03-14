@@ -38,12 +38,20 @@
 ```typescript
 const config: CapacitorConfig = {
   appId: 'com.yourname.cloudprou', // 替换为您刚才申请的 Bundle ID
-  appName: '云集',
+  appName: '云集控',
   webDir: 'dist'
 };
 ```
 
-### 2.2 同步原生项目
+### 2.2 修改 Info.plist 权限 (生物识别)
+在 `ios/App/App/Info.plist` 中，已自动添加了 Face ID 权限描述。如果需要修改提示语，请编辑该文件：
+
+```xml
+<key>NSFaceIDUsageDescription</key>
+<string>我们需要使用面容 ID 来验证您的身份以保护资产安全</string>
+```
+
+### 2.3 同步原生项目
 执行以下命令将配置应用到 iOS 项目：
 
 ```bash

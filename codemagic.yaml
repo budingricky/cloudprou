@@ -10,8 +10,8 @@ workflows:
       vars:
         XCODE_WORKSPACE: "ios/App/App.xcworkspace"
         XCODE_SCHEME: "App"
-        BUNDLE_ID: "com.example.cloudprou" # [重要] 请修改为您在 Apple Developer 创建的真实 Bundle ID
-        APP_STORE_ID: "1234567890" # [重要] 请修改为您在 App Store Connect 创建 App 后生成的 Apple ID (纯数字)
+        BUNDLE_ID: "com.bd1bmc.cloudset" # [重要] 请修改为您在 Apple Developer 创建的真实 Bundle ID
+        APP_STORE_ID: "6760583204" # [重要] 请修改为您在 App Store Connect 创建 App 后生成的 Apple ID (纯数字)
     triggering:
       events:
         - push

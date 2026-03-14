@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.cloudprou',
-  appName: '云集',
+  appId: 'com.bd1bmc.cloudset',
+  appName: '云集控',
   webDir: 'dist'
 };
 
