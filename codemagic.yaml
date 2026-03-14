@@ -29,6 +29,21 @@ workflows:
           npm install --legacy-peer-deps
           npm run build
           npx cap sync ios
+      
+      - name: Set iOS build number
+        script: |
+          LATEST_BUILD_NO=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID" 2>/dev/null || echo 0)
+          if ! [[ "$LATEST_BUILD_NO" =~ ^[0-9]+$ ]]; then LATEST_BUILD_NO=0; fi
+          CM_BUILD_NO="${BUILD_NUMBER:-0}"
+          if ! [[ "$CM_BUILD_NO" =~ ^[0-9]+$ ]]; then CM_BUILD_NO=0; fi
+          if [ "$CM_BUILD_NO" -gt "$LATEST_BUILD_NO" ]; then
+            BUILD_NO="$CM_BUILD_NO"
+          else
+            BUILD_NO=$((LATEST_BUILD_NO + 1))
+          fi
+          cd ios/App
+          xcrun agvtool new-version -all "$BUILD_NO"
+          cd ../..
           
       - name: Debug iOS project structure
         script: |
