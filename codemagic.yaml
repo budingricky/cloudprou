@@ -28,12 +28,16 @@ workflows:
         script: |
           npm install --legacy-peer-deps
           npm run build
+          # Ensure ios platform is added if not exists in repo
+          if [ ! -d "ios" ]; then
+            npx cap add ios
+          fi
           npx cap sync ios
           
       - name: Install CocoaPods dependencies
         script: |
           cd ios/App
-          pod install
+          pod install --repo-update
           
       - name: Initialize Keychain
         script: |
