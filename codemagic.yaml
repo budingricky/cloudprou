@@ -28,14 +28,18 @@ workflows:
         script: |
           npm install --legacy-peer-deps
           npm run build
-          # Ensure ios platform is added if not exists in repo
-          if [ ! -d "ios" ]; then
+          # Force create ios directory structure if missing
+          if [ ! -f "ios/App/Podfile" ]; then
+            echo "Podfile not found, recreating ios platform..."
+            rm -rf ios
             npx cap add ios
           fi
           npx cap sync ios
           
-      - name: Install CocoaPods dependencies
+      - name: Debug and Install CocoaPods
         script: |
+          echo "Current directory: $(pwd)"
+          ls -R ios
           cd ios/App
           pod install --repo-update
           
