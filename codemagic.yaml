@@ -34,6 +34,8 @@ workflows:
             rm -rf ios
             npx cap add ios
           fi
+          # Force update to regenerate Podfile and ensure native plugins are synced
+          npx cap update ios
           npx cap sync ios
           
       - name: Debug and Install CocoaPods
