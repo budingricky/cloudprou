@@ -52,7 +52,7 @@ const Dashboard = () => {
         <header className="px-5 pt-6 pb-2 bg-background rounded-b-[1.5rem] shadow-sm z-10 sticky top-0">
           {/* Top Bar: Title & Actions */}
           <div className="flex justify-between items-center mb-3">
-            <h1 className="text-base font-bold tracking-tight">CloudPro U</h1>
+            <h1 className="text-base font-bold tracking-tight">云集</h1>
             <div className="flex gap-2">
               <Button size="icon" variant="ghost" onClick={handleRefresh} className="h-8 w-8 rounded-full bg-secondary/50 hover:bg-secondary">
                 <motion.div

@@ -50,7 +50,7 @@ const BiometricAuth = () => {
     if (Capacitor.isNativePlatform()) {
       try {
         await NativeBiometric.verifyIdentity({
-          reason: "请验证身份以进入 CloudPro U",
+          reason: "请验证身份以进入 云集",
           title: "生物验证",
           subtitle: "使用指纹或面容ID登录",
           description: "验证您的生物信息",
@@ -125,7 +125,7 @@ const BiometricAuth = () => {
               <Lock className="w-10 h-10 text-primary" />
             )}
           </div>
-          <h1 className="text-2xl font-bold text-foreground mb-2 tracking-tight">CloudPro U</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2 tracking-tight">云集</h1>
           <p className="text-sm text-muted-foreground">多云资产一站式管理</p>
         </div>
 

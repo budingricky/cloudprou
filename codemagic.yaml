@@ -1,0 +1,54 @@
+workflows:
+  ios-release:
+    name: iOS Release
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        - app_store_credentials # 在 Codemagic UI 中配置: APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_IDENTIFIER, APP_STORE_CONNECT_PRIVATE_KEY (API Key 内容)
+        - ios_signing # 在 Codemagic UI 中配置: CERTIFICATE_PRIVATE_KEY (P12文件), CERTIFICATE_PASSWORD (P12密码), PROVISIONING_PROFILE (Profile文件)
+      vars:
+        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_SCHEME: "App"
+        BUNDLE_ID: "com.example.cloudprou" # [重要] 请修改为您在 Apple Developer 创建的真实 Bundle ID
+        APP_STORE_ID: "1234567890" # [重要] 请修改为您在 App Store Connect 创建 App 后生成的 Apple ID (纯数字)
+    triggering:
+      events:
+        - push
+        - tag
+      branch_patterns:
+        - "main"
+        - "release/*"
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+          npm run build
+          npx cap sync ios
+      
+      - name: Initialize Keychain
+        script: |
+          keychain initialize
+      
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            --workspace "$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+            
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - *.dSYM.zip
+      
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        submit_to_testflight: true
+        submit_to_app_store: false
